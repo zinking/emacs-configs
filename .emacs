@@ -1,23 +1,11 @@
 ;; set init file for custom settings
-(setq custom-file "~/.emacs.d/custom.el")
+;(setq custom-file "~/.emacs.d/custom.el")
 
-(when (equal system-type 'darwin)
-  (setenv "PATH" (concat "/Users/ott/Library/Haskell/bin:/opt/local/bin:/usr/local/bin:/usr/local/texlive/2008/bin/universal-darwin/:/Users/ott/bin:/Users/ott/exp/bin:" (getenv "PATH")))
-  (setenv "DYLD_FALLBACK_LIBRARY_PATH" "/usr/lib:/opt/local/lib:/usr/X11R6/lib:~/exp/lib")
-  (push "/opt/local/bin" exec-path)
-  (push "/usr/local/bin" exec-path)
-  (push "/Users/ott/bin" exec-path)
-  (push "/Users/ott/Library/Haskell/bin" exec-path)
-  (push "/Users/ott/exp/bin" exec-path)
-  )
-(when (string= (system-name) "alexott")
-  (setenv "PATH" (concat "/home/ott/.cabal/bin:/home/ott/exp/bin:" (getenv "PATH")))
-  (push "/home/ott/.cabal/bin" exec-path)
-  (push "/home/ott/exp/bin" exec-path)
-  )
 
-;;(load "~/emacs/rc/emacs-rc-cedet.el")
-;;(load "~/emacs/rc/emacs-rc-erlang.el")
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
 (add-to-list 'load-path "~/emacs/evil")
 (require 'evil)
 (evil-mode 1  )
@@ -28,20 +16,6 @@
 (require 'el-get-status)
 (setq el-get-byte-compile nil)
 (setq el-get-recipe-path  '("~/emacs/el-get/recipes/"))
-(setq el-get-sources '(magit psvn org-mode auctex scala-mode
-                             distel slime bbdb clojure-mode 
-			     ess emacs-jabber ahg doxymacs 
-                             emacs-w3m geiser planner remember
-			     xml-rpc-el n3-mode yasnippet 
-                             android-mode elein json tuareg-mode
-			     htmlize cmake-mode paredit quack
-			     js2-mode oddmuse markdown-mode
-			     graphviz-dot-mode google-contacts
-			     ghc-mod auto-complete auto-complete-clang
-			     auto-complete-emacs-lisp auto-complete-latex
-			     auto-complete-css auto-complete-etags
-			     nrepl rainbow-mode
-			     ))
 (el-get 'sync)
 
 ;;(el-get-update-all)
@@ -139,13 +113,15 @@
 
 ;;(load "~/emacs/passwords.el.gpg")
 
-(load custom-file 'noerror)
+;;(load custom-file 'noerror)
 
 ;; for org-mode
 (setq comment-start nil)
 
 ;; for emacs-jabber
 ;;(define-key ctl-x-map "\C-j" jabber-global-keymap)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(setq ansi-color-for-comint-mode t)
-(ansi-color-for-comint-mode-on)
+;;(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;;(setq ansi-color-for-comint-mode t)
+;;(ansi-color-for-comint-mode-on)
+(put 'downcase-region 'disabled nil)
+(setq tramp-default-method "ssh")
