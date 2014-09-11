@@ -1,0 +1,75 @@
+#export EDITOR='emacs -nw'
+
+#add_to_path ~/App/apache-ant-1.9.4/bin
+
+add_to_path /usr/local/bin
+add_to_path ~/scripts/
+
+export ANT_HOME="/usr/local/ant"
+add_to_path ${ANT_HOME}/bin
+
+export M2_HOME="/usr/local/maven"
+add_to_path ${M2_HOME}/bin
+
+export MAVEN_OPTS=-Xmx1024m
+
+export JAVA_OPTS="-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms2048m -Xmx2048m -XX:NewSize=512m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled"
+
+export JAVA_HOME="/Library/Java/Home"
+export CATALINA_HOME="/usr/local/tomcat"
+export BASEDIR=${CATALINA_HOME}
+export CATALINA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1046 -Dgrails.env=development"
+
+#alias rstomcat='shutdown.sh && startup.sh'
+alias cdtom='cd ${CATALINA_HOME}'
+
+
+
+export MAMP_HOME=/Applications/MAMP
+add_to_path ${MAMP_HOME}/bin
+add_to_path ${MAMP_HOME}/Library/bin
+add_to_path ${MAMP_HOME}/bin/php5.2/bin
+
+
+export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
+alias cdtrunk='cd ~/workspace/marin/branches/trunk'
+alias cdmscm='~/workspace/marin/branches/iteration-0053/mscm/sql/setup'
+alias pstom='ps -ef |grep "[c]atalina"'
+
+restart_tomcat()
+{
+    tompid=`ps -ef |grep '[c]atalina' | cut -d" " -f4`
+    if [ ! -z "$tompid" -a "$tompid" != " " ]; then
+        echo 'kill tomcat'
+        kill -9 $tompid
+    fi
+    $CATALINA_HOME/bin/startup.sh
+}
+
+cdmarin()
+{
+   cd ~/workspace/marin/branches/trunk/$1
+}
+
+redeploy_olapstitch()
+{
+    cur_dir=`pwd`
+    cd ~/workspace/marin/branches/trunk/mscm
+    mvn marin:install-fast
+    cd ~/workspace/marin/branches/trunk/olap_stitch
+    mvn marin:install-fast
+    mv $CATALINA_HOME/webapps/olap_stitch.war $CATALINA_HOME/webapps/olap_stitch.$(date  +"%Y%m%d%H%M").war.bak  
+    packagefile=`ls -t ~/workspace/marin/branches/trunk/olap_stitch/target/olap-stitch*.war | head -1`
+    cp $packagefile $CATALINA_HOME/webapps/olap_stitch.war
+    cd $cur_dir
+}
+
+alias addauth="cat ~/.ssh/id_rsa.pub | ssh dev@'cat >> ~/.ssh/authorized_keys'"
+alias cdqabin='cd ~/workspace/marin/qa/int/tests/publishers/bin'
+alias cddb='cd ~/workspace/marin/branches/sh-i53-bugs/mscm/sql/setup/tmp/'
+
+#for building things
+add_to_path /usr/local/autoconf-2.69/bin
+add_to_path /usr/local/bin
+alias xmlstarlet='/usr/local/xmlstarlet-1.6.0/examples/xmlstarlet'

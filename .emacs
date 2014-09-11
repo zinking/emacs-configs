@@ -125,3 +125,16 @@
 ;;(ansi-color-for-comint-mode-on)
 (put 'downcase-region 'disabled nil)
 (setq tramp-default-method "ssh")
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
+	
+	(add-hook 'python-mode-hook guess-style-guess-tabs-mode)
+	   (add-hook 'python-mode-hook (lambda ()
+	                                  (when indent-tabs-mode
+	                                    (guess-style-guess-tab-width)))
+
+				 
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
