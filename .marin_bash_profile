@@ -30,6 +30,9 @@ add_to_path ${MAMP_HOME}/bin
 add_to_path ${MAMP_HOME}/Library/bin
 add_to_path ${MAMP_HOME}/bin/php5.2/bin
 
+add_to_path ~/workspace/marin/spore/marin-bootstrap/bin
+add_to_path ~/bin
+
 
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
@@ -37,12 +40,14 @@ alias cdtrunk='cd ~/workspace/marin/branches/trunk'
 alias cdmscm='~/workspace/marin/branches/iteration-0053/mscm/sql/setup'
 alias pstom='ps -ef |grep "[c]atalina"'
 
+
 restart_tomcat()
 {
     tompid=`ps -ef |grep '[c]atalina' | cut -d" " -f4`
     if [ ! -z "$tompid" -a "$tompid" != " " ]; then
         echo 'kill tomcat'
         kill -9 $tompid
+        sleep 3
     fi
     $CATALINA_HOME/bin/startup.sh
 }
@@ -60,16 +65,38 @@ redeploy_olapstitch()
     cd ~/workspace/marin/branches/trunk/olap_stitch
     mvn marin:install-fast
     mv $CATALINA_HOME/webapps/olap_stitch.war $CATALINA_HOME/webapps/olap_stitch.$(date  +"%Y%m%d%H%M").war.bak  
+    rm -rf $CATALINA_HOME/webapps/olap_stitch
     packagefile=`ls -t ~/workspace/marin/branches/trunk/olap_stitch/target/olap-stitch*.war | head -1`
     cp $packagefile $CATALINA_HOME/webapps/olap_stitch.war
     cd $cur_dir
+    restart_tomcat
+}
+
+
+
+version_branch()
+{
+    echo "mvn marin:update-versions -DnewVersion=$1-SNAPSHOT"
 }
 
 alias addauth="cat ~/.ssh/id_rsa.pub | ssh dev@'cat >> ~/.ssh/authorized_keys'"
 alias cdqabin='cd ~/workspace/marin/qa/int/tests/publishers/bin'
 alias cddb='cd ~/workspace/marin/branches/sh-i53-bugs/mscm/sql/setup/tmp/'
+alias cdwsdls='cd ~/workspace/marin/wsdls/'
+
+alias cdqartp='cd ~/workspace/marin/qa/int/tests/real-time-pipeline'
+alias cdqa='cd ~/workspace/marin/qa/int/tests'
+alias cdqacommon='cd ~/workspace/marin/qa/int/framework'
+
 
 #for building things
 add_to_path /usr/local/autoconf-2.69/bin
 add_to_path /usr/local/bin
 alias xmlstarlet='/usr/local/xmlstarlet-1.6.0/examples/xmlstarlet'
+
+
+alias db="mysql -umarin -pwawptw"
+alias mvnb="mvn marin:install-fast"
+alias mvnu="mvn marin:install-fast-up"
+alias mvne="mvn eclipse:eclipse"
+alias cdspore="cd ~/workspace/marin/spore/"

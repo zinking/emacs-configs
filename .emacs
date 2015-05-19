@@ -10,13 +10,17 @@
 (require 'evil)
 (evil-mode 1  )
 
+(add-to-list 'load-path "~/emacs/scala-mode2/")
+(require 'scala-mode2 )
+
 ;; el-get
 (add-to-list 'load-path "~/emacs/el-get/")
 (require 'el-get)
 (require 'el-get-status)
 (setq el-get-byte-compile nil)
 (setq el-get-recipe-path  '("~/emacs/el-get/recipes/"))
-(el-get 'sync)
+(setq explicit-shell-file-name "/bin/bash")
+;;(el-get 'sync)
 
 ;;(el-get-update-all)
 
