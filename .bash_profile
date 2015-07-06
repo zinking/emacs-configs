@@ -69,18 +69,25 @@ grant_access()
 
 . ~/emacs-configs/.marin_bash_profile
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+#[[ -s "~/.rvm/scripts/rvm" ]] && source "~/.rvm/scripts/rvm"
+# Load RVM into a shell session *as a function*
 
 alias clean_dns="sudo killall mDNSResponder & sudo dscacheutil -flushcache"
+
 alias clean_hangout="sudo killall coreaudiod"
 
 #export PATH="/Users/awang/.jenv/shims:${PATH}"
 add_to_path ~/.jenv/bin
 add_to_path ~/.jenv/shims
+
 source "/usr/local/Cellar/jenv/0.4.1/libexec/libexec/../completions/jenv.zsh"
+
 jenv rehash 2>/dev/null
+
 export JENV_LOADED=1
+
 unset JAVA_HOME
+
 jenv() {
   typeset command
   command="$1"
@@ -98,3 +105,31 @@ jenv() {
 
 
 
+add_to_path ~/.rbenv/bin
+
+#eval "$(rbenv init -)" $ exec /bin/zsh -l
+
+export MAGICK_HOME="/usr/local/Cellar/imagemagick/6.9.1-3"
+add_to_path "$MAGICK_HOME"
+
+export DYLD_LIBRARY_PATH="$MAGICK_HOME/lib/"
+alias lycurl='curl --header "X-Spree-Token:dca07e266fdd1c57e42d5cc97f8c866e723a1d817fe7d850"'
+
+alias clearkafkaqueue='rm -rf /tmp/kafka-logs/*'
+
+alias cdly='cd ~/os/zhenw/ly/liangyi'
+
+#setup a user
+
+setup_newenv(){
+    useradd -m awang
+    passwd awang
+    sudo adduser awang sudo
+    chsh -s /bin/bash awang
+
+    su awang
+    cd ~
+
+    git clone https://github.com/zinking/emacs-configs.git
+    ln -sfn emacs-configs/.bash_profile .bash_profile #home dir 
+}

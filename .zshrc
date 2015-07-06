@@ -55,6 +55,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+
 #export PATH="/usr/local/autoconf-2.69/bin:/Applications/MAMP/bin/php5.2/bin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin:/usr/local/maven/bin:/usr/local/ant/bin:/Users/awang/scripts/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/awang/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -87,3 +88,6 @@ source $ZSH/oh-my-zsh.sh
 #export PS1="%n%{$fg[blue]%}(%u) \$(sd_retval_cond '%{$fg[green]%}' '%{$fg[red]%}')[\$(sd_retval_cond woo \"aww \$?\")] %{$fg[cyan]%}(\$(date +%H:%M:%S)) %{$fg[pink]%}\$(echo '' ' %{$fg[cyan]%}')%n%{$fg[reset]%}%{$fg[blue]%}\$%{$fg[reset]%}"
 #precmd() { print ">" }
 bindkey -v
+
+
+eval "$(rbenv init -)"
