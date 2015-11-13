@@ -118,6 +118,8 @@ alias lycurl='curl --header "X-Spree-Token:dca07e266fdd1c57e42d5cc97f8c866e723a1
 alias clearkafkaqueue='rm -rf /tmp/kafka-logs/*'
 
 alias cdly='cd ~/os/zhenw/ly/liangyi'
+alias cdmine='cd ~/os/zhenw/mining-solution'
+alias svnclean_untracked="svn status | grep '^?' | awk '{print $2}' | xargs rm -r"
 
 #setup a user
 
@@ -133,3 +135,18 @@ setup_newenv(){
     git clone https://github.com/zinking/emacs-configs.git
     ln -sfn emacs-configs/.bash_profile .bash_profile #home dir 
 }
+
+# added by Anaconda 2.3.0 installer
+export PATH="/Users/awang/anaconda/bin:$PATH"
+jenv enable-plugin maven   
+
+MYTTY=`tty`
+HISTFILE=$HOME/.bash_history_`basename $MYTTY`
+
+
+addrsa2vm(){
+    cmd="cat ~/.ssh/id_rsa.pub | ssh dev@$1 'cat >> ~/.ssh/authorized_keys'"
+    echo $cmd
+    `$cmd`
+}
+

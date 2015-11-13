@@ -99,4 +99,11 @@ alias db="mysql -umarin -pwawptw"
 alias mvnb="mvn marin:install-fast"
 alias mvnu="mvn marin:install-fast-up"
 alias mvne="mvn eclipse:eclipse"
+alias mvnp="mvn package -DskipTests"
 alias cdspore="cd ~/workspace/marin/spore/"
+
+jar2vm() {
+    #echo "clean & build"
+    #mvn clean && mvnb
+    scp ./target/$1-*-SNAPSHOT.jar dev@$2.marinsoftware.com:~/zhenw
+}
