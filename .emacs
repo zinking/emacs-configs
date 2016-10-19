@@ -1,6 +1,17 @@
 ;; set init file for custom settings
 ;(setq custom-file "~/.emacs.d/custom.el")
 
+(require 'package)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-archives
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa-stable" . "http://stable.melpa.org/packages/")))))
+
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -10,15 +21,15 @@
 (require 'evil)
 (evil-mode 1  )
 
-(add-to-list 'load-path "~/emacs/scala-mode2/")
-(require 'scala-mode2 )
+;;(add-to-list 'load-path "~/emacs/scala-mode2/")
+;;(require 'scala-mode2 )
 
 ;; el-get
-(add-to-list 'load-path "~/emacs/el-get/")
-(require 'el-get)
-(require 'el-get-status)
-(setq el-get-byte-compile nil)
-(setq el-get-recipe-path  '("~/emacs/el-get/recipes/"))
+;;(add-to-list 'load-path "~/emacs/el-get/")
+;;(require 'el-get)
+;;(require 'el-get-status)
+;;(setq el-get-byte-compile nil)
+;;(setq el-get-recipe-path  '("~/emacs/el-get/recipes/"))
 (setq explicit-shell-file-name "/bin/bash")
 ;;(el-get 'sync)
 
@@ -43,49 +54,49 @@
 (load "~/emacs/rc/emacs-rc-remember.el")
 ;;(load "~/emacs/rc/emacs-rc-org-mode.el")
 ;; text editing
-(load "~/emacs/rc/emacs-rc-ispell.el")
+;;(load "~/emacs/rc/emacs-rc-ispell.el")
 ;;(load "~/emacs/rc/emacs-rc-muse.el")
-(load "~/emacs/rc/emacs-rc-tex.el")
-(load "~/emacs/rc/emacs-rc-nxml.el")
-(load "~/emacs/rc/emacs-rc-html.el")
+;;(load "~/emacs/rc/emacs-rc-tex.el")
+;;(load "~/emacs/rc/emacs-rc-nxml.el")
+;;(load "~/emacs/rc/emacs-rc-html.el")
 ;;(load "~/emacs/rc/emacs-rc-wikis.el")
 ;; programming tools & languages
-(load "~/emacs/rc/emacs-rc-prog-misc.el")
-(load "~/emacs/rc/emacs-rc-flymake.el")
-(load "~/emacs/rc/emacs-rc-gdb.el")
+;;(load "~/emacs/rc/emacs-rc-prog-misc.el")
+;;(load "~/emacs/rc/emacs-rc-flymake.el")
+;;(load "~/emacs/rc/emacs-rc-gdb.el")
 ;;(load "~/emacs/rc/emacs-rc-ccmode.el")
-(load "~/emacs/rc/emacs-rc-python.el")
+;;(load "~/emacs/rc/emacs-rc-python.el")
 ;;(load "~/emacs/rc/emacs-rc-doxygen.el")
-(load "~/emacs/rc/emacs-rc-elisp.el")
+;;(load "~/emacs/rc/emacs-rc-elisp.el")
 ;(load "~/emacs/rc/emacs-rc-ecb.el")
-(load "~/emacs/rc/emacs-rc-prolog.el")
-(load "~/emacs/rc/emacs-rc-javascript.el")
-(load "~/emacs/rc/emacs-rc-css.el")
+;;(load "~/emacs/rc/emacs-rc-prolog.el")
+;;(load "~/emacs/rc/emacs-rc-javascript.el")
+;;(load "~/emacs/rc/emacs-rc-css.el")
 ;;(load "~/emacs/rc/emacs-rc-scheme.el")
 ;;(load "~/emacs/rc/emacs-rc-ocaml.el")
-(load "~/emacs/rc/emacs-rc-lisp.el")
-(load "~/emacs/rc/emacs-rc-clojure.el")
+;;(load "~/emacs/rc/emacs-rc-lisp.el")
+;;(load "~/emacs/rc/emacs-rc-clojure.el")
 ;;(load "~/emacs/rc/emacs-rc-slime.el")
 ;;(load "~/emacs/rc/emacs-rc-haskell.el")
-(load "~/emacs/rc/emacs-rc-scala.el")
-(load "~/emacs/rc/emacs-rc-sh-mode.el")
-(load "~/emacs/rc/emacs-rc-auto-insert.el")
-(load "~/emacs/rc/emacs-rc-cmake.el")
+;;(load "~/emacs/rc/emacs-rc-scala.el")
+;;(load "~/emacs/rc/emacs-rc-sh-mode.el")
+;;(load "~/emacs/rc/emacs-rc-auto-insert.el")
+;;(load "~/emacs/rc/emacs-rc-cmake.el")
 ;;(load "~/emacs/rc/emacs-rc-distel.el")
-(load "~/emacs/rc/emacs-rc-octave.el")
+;;(load "~/emacs/rc/emacs-rc-octave.el")
 ;;
 ;; VCS & DVCS
 ;;(load "~/emacs/rc/emacs-rc-mercurial.el")
 ;;(load "~/emacs/rc/emacs-rc-dvc.el")
 ;;(load "~/emacs/rc/emacs-rc-git.el")
-(load "~/emacs/rc/emacs-rc-vcs-misc.el")
+;;(load "~/emacs/rc/emacs-rc-vcs-misc.el")
 ;;
 ;; WWW, IM, social networking & blogging
 ;;(load "~/emacs/rc/emacs-rc-twitter.el")
 ;;(load "~/emacs/rc/emacs-rc-jabber.el")
-(load "~/emacs/rc/emacs-rc-w3.el")
+;;(load "~/emacs/rc/emacs-rc-w3.el")
 ;(load "~/emacs/rc/emacs-rc-erc.el")
-(load "~/emacs/rc/emacs-rc-w3m.el")
+;;(load "~/emacs/rc/emacs-rc-w3m.el")
 ;;(load "~/emacs/rc/emacs-rc-eblogger.el")
 ;;(load "~/emacs/rc/emacs-rc-lj.el")
 ;;
@@ -113,7 +124,7 @@
 ;;  (when (file-exists-p fname)
 ;;    (load fname)))
 
-(load "~/emacs/rc/emacs-rc-desktop.el")
+;;(load "~/emacs/rc/emacs-rc-desktop.el")
 
 ;;(load "~/emacs/passwords.el.gpg")
 

@@ -106,6 +106,8 @@ jenv() {
 
 
 add_to_path ~/.rbenv/bin
+add_to_path /Users/awang/.node/bin/
+add_to_path ~/Library/Haskell/bin/
 
 #eval "$(rbenv init -)" $ exec /bin/zsh -l
 
@@ -119,9 +121,13 @@ alias clearkafkaqueue='rm -rf /tmp/kafka-logs/*'
 
 alias cdly='cd ~/os/zhenw/ly/liangyi'
 alias cdmine='cd ~/os/zhenw/mining-solution'
+alias cdexd='cd /Users/awang/os/edx'
 alias svnclean_untracked="svn status | grep '^?' | awk '{print $2}' | xargs rm -r"
+alias mcis='mvn clean install -DskipTests'
+
 
 #setup a user
+add_to_path ~/.cabal/bin
 
 setup_newenv(){
     useradd -m awang
@@ -146,7 +152,23 @@ HISTFILE=$HOME/.bash_history_`basename $MYTTY`
 
 addrsa2vm(){
     cmd="cat ~/.ssh/id_rsa.pub | ssh dev@$1 'cat >> ~/.ssh/authorized_keys'"
+    echo "cat ~/.ssh/id_rsa.pub | ssh dev-vm-425 'cat >> ~/.ssh/authorized_keys'"
     echo $cmd
     `$cmd`
+}
+add_to_path /Users/awang/.local/bin
+
+add_to_path /usr/local/Cellar/go/1.4.2/bin
+
+gh(){
+    cmd="grep -i '$1' ~/.bash_history*"
+    echo $cmd
+    eval $cmd
+}
+
+indexsolr(){
+    cmd="java -jar ~/workspace/apache/cmdline-jmxclient-0.10.3.jar - $1:1101 com.marin.test:type=MessageSender,name=messageSender sendFullSolrClientIndex=$2"
+    echo $cmd
+    eval $cmd
 }
 
