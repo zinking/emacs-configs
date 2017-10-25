@@ -105,6 +105,13 @@ alias mvne="mvn eclipse:eclipse"
 alias mvnp="mvn package -DskipTests"
 alias cdspore="cd ~/workspace/marin/spore/"
 alias cdapache='cd ~/workspace/apache/'
+alias catavro='java -jar /Users/awang/workspace/marin/spore/alphabits/avro-tools-1.7.7.jar tojson '
+alias avrocat='java -jar /Users/awang/workspace/marin/spore/alphabits/avro-tools-1.7.7.jar tojson '
+alias orccat='java -jar /Users/awang/workspace/apache/orc/java/tools/target/orc-tools-1.5.0-SNAPSHOT-uber.jar  data '
+alias orcschema='java -jar /Users/awang/workspace/apache/orc/java/tools/target/orc-tools-1.5.0-SNAPSHOT-uber.jar  meta '
+
+alias avroschema='java -jar /Users/awang/workspace/marin/spore/alphabits/avro-tools-1.7.7.jar getschema '
+alias presto-dev='bash /Users/awang/workspace/apache/presto/presto-cli/presto-cli.sh --server http://labs-harkonnen-datanode-lv-101.labs.marinsw.net:8080 --catalog hive'
 
 jar2vm() {
     #echo "clean & build"
@@ -112,4 +119,51 @@ jar2vm() {
     scp ./target/$1-*-SNAPSHOT.jar dev@$2.marinsoftware.com:~/zhenw
 }
 
+jmxBidSend() {
+    bidCmd="java -jar ~/workspace/apache/cmdline-jmxclient-0.10.3.jar - $1:1101 com.marin.test:type=MessageSender,name=biddingMessageSender $2"
+    echo $bidCmd
+    eval $bidCmd
+}
+
 export GOPATH=/usr/local/Cellar/go/1.4.2/
+#export HADOOP_HOME=/usr/local/opt/hadoop/
+#export SPARK_DIST_CLASSPATH=$(hadoop classpath)
+
+
+deployToZod() {
+    namespace=$1
+    echo "mkdir"
+    mkdir /tmp/${namespace}
+    echo "extract file"
+    for tarfile in `findg 'gz$'`; do tar -xf $tarfile -C /tmp/${namespace}; done;
+    cd /tmp/${namespace}
+    echo "update properties"
+    sed -i.bak s/donotdelete/${namespace}/g `findg properties | ag qa`
+    hadoop fs -copyFromLocal -f /tmp/${namespace} hdfs://qa2-zod/oozie-spark/
+}
+
+deployToZodRemote() {
+    namespace=$1
+    set -o xtrace
+    ssh qa2oozie "mkdir -p ~/deploy/$1/"
+    ssh qa2oozie "echo $1 > /tmp/depname"
+    for tarfile in `findg 'gz$'`; do scp $tarfile qa2oozie:~/deploy/$1/; done;
+ssh qa2oozie << EOF
+    depname=`cat /tmp/depname`
+    cd ~/deploy/$depname/
+
+    for tarfile in `ls`; do tar -xf $tarfile -C ./; done; 
+
+    for depfile in `find . | grep deploy`;    
+    do 
+       cd `dirname $depfile`                
+       bash deploy_to_hdfs.sh $depname
+       cd -
+    done
+
+EOF
+    set +o xtrace
+}
+
+
+add_to_path /usr/local/Cellar/subversion@1.8/1.8.16/bin/

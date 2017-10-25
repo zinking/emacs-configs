@@ -88,6 +88,13 @@ source $ZSH/oh-my-zsh.sh
 #export PS1="%n%{$fg[blue]%}(%u) \$(sd_retval_cond '%{$fg[green]%}' '%{$fg[red]%}')[\$(sd_retval_cond woo \"aww \$?\")] %{$fg[cyan]%}(\$(date +%H:%M:%S)) %{$fg[pink]%}\$(echo '' ' %{$fg[cyan]%}')%n%{$fg[reset]%}%{$fg[blue]%}\$%{$fg[reset]%}"
 #precmd() { print ">" }
 bindkey -v
+bindkey "^R" history-incremental-search-backward
 
 
 eval "$(rbenv init -)"
+
+#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source zsh-history-substring-search.zsh
+
+#bindkey -M vicmd 'k' history-substring-search-up
+#bindkey -M vicmd 'j' history-substring-search-down

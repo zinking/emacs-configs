@@ -79,6 +79,12 @@ alias clean_hangout="sudo killall coreaudiod"
 #export PATH="/Users/awang/.jenv/shims:${PATH}"
 add_to_path ~/.jenv/bin
 add_to_path ~/.jenv/shims
+ 
+add_to_path ~/.scalaenv/bin
+add_to_path ~/.scalaenv/shims
+
+#add_to_path ~/workspace/amp5/spark/bin/
+add_to_path /Users/awang/workspace/apache/spark-2.1.0-bin-hadoop2.7/bin
 
 source "/usr/local/Cellar/jenv/0.4.1/libexec/libexec/../completions/jenv.zsh"
 
@@ -161,7 +167,7 @@ add_to_path /Users/awang/.local/bin
 add_to_path /usr/local/Cellar/go/1.4.2/bin
 
 gh(){
-    cmd="grep -i '$1' ~/.bash_history*"
+    cmd="ag -i '$1' ~/.bash_history*"
     echo $cmd
     eval $cmd
 }
@@ -172,3 +178,30 @@ indexsolr(){
     eval $cmd
 }
 
+
+# Common Hadoop File System Aliases
+alias hf="hadoop fs"                                         # Base Hadoop fs command
+alias hfcat="hf -cat"                                        # Output a file to standard out
+alias hfchgrp="hf -chgrp"                                    # Change group association of files
+alias hfchmod="hf -chmod"                                    # Change permissions
+alias hfchown="hf -chown"                                    # Change ownership
+alias hfcfl="hf -copyFromLocal"                              # Copy a local file reference to HDFS
+alias hfctl="hf -copyToLocal"                                # Copy a HDFS file reference to local
+alias hfcp="hf -cp"                                          # Copy files from source to destination
+alias hfdu="hf -du"                                          # Display aggregate length of files
+alias hfdus="hf -dus"                                        # Display a summary of file lengths
+alias hfduh="hdfs dfs -du -s -h "                                        # Display a summary of file lengths
+alias hfget="hf -get"                                        # Get a file from hadoop to local
+alias hfgetm="hf -getmerge"                                  # Get files from hadoop to a local file
+alias hfls="hf -ls"                                          # List files
+alias hfll="hf -lsr"                                         # List files recursivly
+alias hfmkdir="hf -mkdir"                                    # Make a directory
+alias hfmv="hf -mv"                                          # Move a file
+alias hfput="hf -put"                                        # Put a file from local to hadoop
+alias hfrm="hf -rm"                                          # Remove a file
+alias hfrmr="hf -rmr"                                        # Remove a file recursivly
+alias hfsr="hf -setrep"                                      # Set the replication factor of a file
+alias hfstat="hf -stat"                                      # Returns the stat information on the path
+alias hftail="hf -tail"                                      # Tail a file
+alias hftest="hf -test"                                      # Run a series of file tests. See options
+alias hftouch="hf -touchz"                                   # Create a file of zero length
